@@ -29,12 +29,10 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v7
         with:
-          token: ${{ secrets.TOKEN }}
           commit-message: "update version file"
           title: "New version release"
           body: "Updating version file"
           branch: ${{ github.sha }}
-          labels: "jackaas"
 
       - name: Create Release
         if: ${{ success() }}
