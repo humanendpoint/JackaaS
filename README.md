@@ -47,7 +47,7 @@ It also can display charts of various input.
     `SLACK_BOT_TOKEN`
     `SLACK_SIGNING_SECRET`
     `SLACK_USER_TOKEN`
-- And a secret for `COMPANY_DOMAIN`.
+- And a secret for `COMPANY_DOMAIN` as well.
 
 ## Features
 

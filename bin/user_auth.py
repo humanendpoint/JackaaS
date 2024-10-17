@@ -15,7 +15,8 @@ class UserAuthorization:
         try:
             user_info = self.client.users_info(user=user_id)
             email = user_info['user']['profile']['email']
-            user = email.replace("@catawiki.nl", "")
+            company_domain = os.environ.get("COMPANY_DOMAIN")
+            user = email.replace(f"@{company_domain}", "")
             
             if user:
                 privileges, access_level = self.get_user_groups(user)
