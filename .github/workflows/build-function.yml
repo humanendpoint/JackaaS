@@ -34,7 +34,6 @@ jobs:
           title: "New version release"
           body: "Updating version file"
           branch: ${{ github.sha }}
-          base: "main"
           labels: "jackaas"
 
       - name: Create Release
