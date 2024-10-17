@@ -5,8 +5,8 @@ It also can display charts of various input.
 
 #### Note
 
-There is an `example.yml` that can be used instead of `build-function.yml`. 
-It checks whether this repo has been updated with new code (subsequently a new version) or not, and then uploads the new version to google cloud functions for you.
+There is an `example.yml` that can be used instead of `build-function.yml` once you clone this repo.
+It checks whether *this* repo has been updated with new code (subsequently a new version) or not, and then uploads the new version to google cloud functions for you.
 
 ## What you need
 
