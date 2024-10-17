@@ -31,24 +31,26 @@ jobs:
         if: ${{ steps.gcs-auth.outcome == 'success' }}
         uses: 'google-github-actions/setup-gcloud@v2'
 
-      - uses: google-github-actions/deploy-cloud-functions@v3
-        with:
-          name: ${{ secrets.GCF_NAME }}
-          region: ${{ secrets.GCF_REGION }}
-          project_id: ${{ secrets.GCF_PROJECT }}
-          runtime: "python3.11"
-          entry_point: "main"
-          memory_mb: 256
-          source_dir: "bin"
-          deploy_timeout: 480
-          env_vars: |
-            PROJECT_ID=${{ secrets.PROJECT_ID }}
-            GOOGLE_SERVICE_ACCOUNT=${{ secrets.GCF_SERVICE_ACCOUNT }}
-            JAMF_CLIENT_ID=${{ secrets.JAMF_CLIENT_ID }}
-            JAMF_CLIENT_SECRET=${{ secrets.JAMF_CLIENT_SECRET }}
-            SLACK_BOT_TOKEN=${{ secrets.SLACK_BOT_TOKEN }}
-            SLACK_SIGNING_SECRET=${{ secrets.SLACK_SIGNING_SECRET }}
-            SLACK_USER_TOKEN=${{ secrets.SLACK_USER_TOKEN }}
+      # uncomment the below to deploy the function to GCF
+      
+      #- uses: google-github-actions/deploy-cloud-functions@v2
+      #  with:
+      #    name: ${{ secrets.GCF_NAME }}
+      #    region: ${{ secrets.GCF_REGION }}
+      #    project_id: ${{ secrets.GCF_PROJECT }}
+      #    runtime: "python3.11"
+      #    entry_point: "main"
+      #    memory_mb: 256
+      #    source_dir: "bin"
+      #    deploy_timeout: 480
+      #    env_vars: |
+      #      PROJECT_ID=${{ secrets.PROJECT_ID }}
+      #      GOOGLE_SERVICE_ACCOUNT=${{ secrets.GCF_SERVICE_ACCOUNT }}
+      #      JAMF_CLIENT_ID=${{ secrets.JAMF_CLIENT_ID }}
+      #      JAMF_CLIENT_SECRET=${{ secrets.JAMF_CLIENT_SECRET }}
+      #      SLACK_BOT_TOKEN=${{ secrets.SLACK_BOT_TOKEN }}
+      #      SLACK_SIGNING_SECRET=${{ secrets.SLACK_SIGNING_SECRET }}
+      #      SLACK_USER_TOKEN=${{ secrets.SLACK_USER_TOKEN }}
 
       - name: Update version file
         id: version
