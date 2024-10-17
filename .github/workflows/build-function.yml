@@ -6,7 +6,6 @@ on:
         description: The new version of the function
         required: False
 
-
 jobs:
   createrelease:
     runs-on: ubuntu-latest
@@ -37,13 +36,12 @@ jobs:
 
       - name: Create Release
         if: ${{ success() }}
-        uses: softprops/action-gh-release@c062e08bd532815e2082a85e87e3ef29c3e6d191 # v0.1.15
+        uses: softprops/action-gh-release@v2.0.8
         with:
           name: "v${{ steps.version.outputs.VERSION }}"
           tag_name: ${{ steps.version.outputs.VERSION }}
           draft: false
           prerelease: false
           token: ${{ secrets.TOKEN }}
-          body: |
-            This is a new release of the Google Cloud Function called JackaaS.
+          generate_release_notes: true
           files: ${{ github.workspace }}/bin

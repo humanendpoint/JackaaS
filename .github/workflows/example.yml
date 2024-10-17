@@ -5,7 +5,7 @@ on:
     - cron: '0 0 1 * *'
 
 jobs:
-  munki-stats:
+  createrelease:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -71,13 +71,12 @@ jobs:
         with:
           commit-message: "update function"
           title: "New version release"
-          body: "Updating function"
           branch: "update-version-${{ github.sha }}"
 
       - name: Create Release
         id: create_release
         if: ${{ success() }}
-        uses: softprops/action-gh-release@c062e08bd532815e2082a85e87e3ef29c3e6d191 # v0.1.15
+        uses: softprops/action-gh-release@v2.0.8
         with:
           name: "JackaaS"
           tag_name: ${{ steps.read_version.outputs.VERSION }}
