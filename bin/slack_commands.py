@@ -1,5 +1,5 @@
 class SlackCommands:
-    # each entry needs a corresponding elif in 
+    # each entry needs a corresponding elif in
     # the execute_command function in slack_handler
     commands = {
         "appstore": "appstore <all_or_computer_name>",
@@ -23,7 +23,7 @@ class SlackCommands:
         "recovery": "recovery <computer_name1> [computer_name2] [computer_name3]",
         "show_script": "show script <script_name_or_all>",
         "help": "help",
-        "commands": "commands"  # For listing commands
+        "commands": "commands",  # For listing commands
     }
     # each command needs a corresponding permission in JAMF for the user
     # to be able to execute the command on Slack
@@ -50,9 +50,9 @@ class SlackCommands:
         "membership": ["Read Smart Computer Groups"],
         "report": ["Read Computers"],
         "help": ["Read Computers"],
-        "commands": ["Read Computers"]
+        "commands": ["Read Computers"],
     }
-    
+
     helpmessage = {
         "appstore": "list app store apps installed per client or for all (top 10)",
         "count_group": "count members of smart group",
@@ -76,6 +76,7 @@ class SlackCommands:
         "recovery": "display recovery key for a client",
         "show_script": "display a list of all scripts or contents of a script",
     }
+
     @classmethod
     def get_commands(cls):
         """Return the available commands."""
