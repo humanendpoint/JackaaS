@@ -1,0 +1,93 @@
+name: JackaaS Release
+on:
+  workflow_dispatch:
+
+jobs:
+  munki-stats:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      
+      - uses: actions/checkout@v4
+        with:
+          repository: 'humanendpoint/JackaaS'
+          path: 'jackaas'
+
+      - name: Read version file of remote repo
+        id: read_version
+        run: |
+          echo "VERSION=$(cat VERSION)" >> $GITHUB_OUTPUT
+        working-directory: jackaas
+
+      - name: Compare version files
+        run: |
+          echo "Local version: $(cat VERSION)"
+          echo "Remote version: $VERSION"
+          if [ "$(cat VERSION)" == "$VERSION" ]; then
+            echo "No new version found. Exiting."
+            exit 1
+          else
+            mv jackaas/bin bin
+          fi
+        env:
+          VERSION: ${{ steps.read_version.outputs.VERSION }}
+
+      - name: GCS Auth
+        id: gcs-auth
+        uses: 'google-github-actions/auth@v2'
+        with:
+          token_format: 'access_token'
+          credentials_json: "${{ env.GCF_CREDENTIALS }}"
+
+      - name: Setup Cloud SDK
+        if: ${{ steps.gcs-auth.outcome == 'success' }}
+        uses: 'google-github-actions/setup-gcloud@v2'
+
+      - uses: google-github-actions/deploy-cloud-functions@v2
+        with:
+          name: ${{ secrets.GCF_NAME }}
+          region: ${{ secrets.GCF_REGION }}
+          project_id: ${{ secrets.GCF_PROJECT }}
+          runtime: "python3.11"
+          entry_point: "main"
+          memory_mb: 256
+          source_dir: "bin"
+          deploy_timeout: 480
+          env_vars: |
+            PROJECT_ID=${{ secrets.PROJECT_ID }}
+            GOOGLE_SERVICE_ACCOUNT=${{ secrets.GCF_SERVICE_ACCOUNT }}
+            JAMF_CLIENT_ID=${{ secrets.JAMF_CLIENT_ID }}
+            JAMF_CLIENT_SECRET=${{ secrets.JAMF_CLIENT_SECRET }}
+            SLACK_BOT_TOKEN=${{ secrets.SLACK_BOT_TOKEN }}
+            SLACK_SIGNING_SECRET=${{ secrets.SLACK_SIGNING_SECRET }}
+            SLACK_USER_TOKEN=${{ secrets.SLACK_USER_TOKEN }}
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          token: ${{ secrets.TOKEN }}
+          commit-message: "update function"
+          title: "New version release"
+          body: "Updating function"
+          branch: ${{ github.sha }}
+          base: "main"
+          labels: "jackaas"
+
+      - name: Create Release
+        id: create_release
+        if: ${{ success() }}
+        uses: softprops/action-gh-release@c062e08bd532815e2082a85e87e3ef29c3e6d191 # v0.1.15
+        with:
+          name: "JackaaS"
+          tag_name: ${{ steps.read_version.outputs.VERSION }}
+          draft: false
+          prerelease: false
+          token: ${{ secrets.GITHUB_TOKEN }}
+          files: ${{ github.workspace }}/bin

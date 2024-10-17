@@ -3,6 +3,11 @@
 Simply put this is a Slack app to interact with JAMF, able to obtain data and perform (some) actions relevant to JAMF clients. 
 It also can display charts of various input.
 
+#### Note
+
+There is an `example.yml` that can be used instead of `build-function.yml`. 
+It checks whether this repo has been updated with new code (subsequently a new version) or not, and then uploads the new version to google cloud functions for you.
+
 ## What you need
 
 - A `Google Cloud Platform` project with access to admin Google Cloud Functions
