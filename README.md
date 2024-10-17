@@ -47,6 +47,7 @@ It also can display charts of various input.
     `SLACK_BOT_TOKEN`
     `SLACK_SIGNING_SECRET`
     `SLACK_USER_TOKEN`
+- And a secret for `COMPANY_DOMAIN`.
 
 ## Features
 
@@ -60,10 +61,12 @@ It also can display charts of various input.
 #### groups management
 #### other
 
+
 ## Assumptions
 
     - assumes Slack user emails are identical to JAMF user email
     - assumes usernames in JAMF are structured like “u.sername” or a serial number (will be adjusted to be user determined for client naming style)
+
 
 ## More information
 
