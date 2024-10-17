@@ -19,7 +19,7 @@ It checks whether *this* repo has been updated with new code (subsequently a new
 - [x] report lists
 - [x] charts (pie, bar, doughnut, horizontal bar)
 - [x] groups management
-- [x] and more!
+- and more!
 - [ ] handles any "computer name" type for validation
 <br>
 
