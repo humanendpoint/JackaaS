@@ -8,7 +8,7 @@ on:
 
 
 jobs:
-  munki-stats:
+  createrelease:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -74,7 +74,7 @@ jobs:
         if: ${{ success() }}
         uses: softprops/action-gh-release@c062e08bd532815e2082a85e87e3ef29c3e6d191 # v0.1.15
         with:
-          name: "JackaaS"
+          name: "v${{ steps.version.outputs.VERSION }}"
           tag_name: ${{ steps.version.outputs.VERSION }}
           draft: false
           prerelease: false
