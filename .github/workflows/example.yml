@@ -56,6 +56,8 @@ jobs:
           entry_point: "main"
           memory_mb: 256
           source_dir: "bin"
+          max_instances: 15
+          min_instances: 1
           deploy_timeout: 480
           env_vars: |
             PROJECT_ID=${{ secrets.PROJECT_ID }}
