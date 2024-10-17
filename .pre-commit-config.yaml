@@ -1,5 +1,5 @@
 ci:
-    autoupdate_schedule: weekly
+  autoupdate_schedule: weekly
 
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks

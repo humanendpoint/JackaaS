@@ -43,7 +43,8 @@ class SlackHandler:
 
         if cmd_key in self.commands:
             args = text[len(cmd_key):].strip()
-            if args or "files" in cmd_key:
+            bypass_functions = ["files", "help", "commands", "duplicates"]
+            if args or bypass_functions in cmd_key:
                 self.process_command(cmd_key, args, response)
             else:
                 self.app.client.chat_update(
@@ -198,6 +199,7 @@ class SlackHandler:
             chart_text="Architecture comparison on request"
         )
     
+    # unfinished
     def appstore_chart_helper(self):
         top_apps = self.jamf_client.orchestra.orchestrate_get_appstore_apps()
         # Prepare labels and counts for chart_helper
@@ -206,7 +208,8 @@ class SlackHandler:
         labels, counts = zip(*top_apps)  # Unzip the top apps into labels and counts
         # Use chart_helper to generate the chart
         return self.chart_helper(
-            lambda: labels,  # Use a lambda to return labels directly
+            lambda: labels,  # Use a lambda to return labels
+            chart_type="horizontalBar",
             chart_text="Appstore apps comparison on request",
             counts=counts
         )
@@ -218,6 +221,7 @@ class SlackHandler:
             # Generate the chart with counts and labels
             chart_url = self.jamf_utils.generate_other_chart(list(data_names), counts, chart_type, text=chart_text)
             return chart_url
+
         # Get the data using the passed data source method
         data_names = data_source_method()
         if not data_names:
@@ -284,11 +288,14 @@ class SlackHandler:
                             split_point = SLACK_MESSAGE_LIMIT  # No newline found, just split
                         messages.append(result_message[:split_point])
                         result_message = result_message[split_point:].lstrip()  # Continue with the rest of the message
+
                 return messages
         else:
             return "Please provide the script name after `show script`."
 
 
+
+    # unfinished
     def handle_mdmcommands(self, args):
         mdm_command_log = args.split()
         if len(mdm_command_log) >= 1:
@@ -312,6 +319,7 @@ class SlackHandler:
                 number = int(appstoreapps[1])
             else:
                 number = 15
+
             # Get the appstore overview with the specified or default number
             appstore_overview = self.jamf_client.orchestra.orchestrate_get_appstore_overview(number)
             if appstore_overview:
@@ -329,8 +337,9 @@ class SlackHandler:
 
         # If no valid command, prompt for proper input
         return "Please enter the proper appstore command followed by computernames (or `u.sername`)."
-    
+
             
+    # untested
     def handle_mdmexpiry(self, args):
         expiry = args.split()
         if len(expiry) >= 1:
@@ -472,19 +481,21 @@ class SlackHandler:
         else:
             return "Please enter the proper device lock command followed by computernames (or `u.sername`)"
 
-    def handle_duplicates(self, *args):
-        jamf_computers = self.jamf_utils.get_all_computers()
-        duplicate_laptops = []
-        seen_laptops = set()
-        for laptop in jamf_computers["computers"]:
-            name = laptop["name"]
-            if name in seen_laptops:
-                if "_" not in name:
-                    duplicate_laptops.append(name)
-            else:
-                seen_laptops.add(name)
-        duplicates = self.jamf_client.orchestra.orchestrate_duplicates(duplicate_laptops)
-        return duplicates
+    def handle_duplicates(self, args):
+        dupes = args.split()
+        if dupes[0] == "all":
+            jamf_computers = self.jamf_utils.get_all_computers()
+            duplicate_laptops = []
+            seen_laptops = set()
+            for laptop in jamf_computers["computers"]:
+                name = laptop["name"]
+                if name in seen_laptops:
+                    if "_" not in name:
+                        duplicate_laptops.append(name)
+                else:
+                    seen_laptops.add(name)
+            duplicates = self.jamf_client.orchestra.orchestrate_duplicates(duplicate_laptops)
+            return duplicates
         
     def handle_files(self, args):
         jcds_files = self.jamf_client.orchestra.orchestrate_files()
