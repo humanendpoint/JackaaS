@@ -1,20 +1,17 @@
 name: JackaaS Release
 on:
-  workflow_dispatch:
+  workflow_dispatch:  
+  schedule:
+    - cron: '0 0 1 * *'
 
 jobs:
   munki-stats:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      
       - uses: actions/checkout@v4
         with:
           repository: 'humanendpoint/JackaaS'
@@ -72,13 +69,10 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v7
         with:
-          token: ${{ secrets.TOKEN }}
           commit-message: "update function"
           title: "New version release"
           body: "Updating function"
-          branch: ${{ github.sha }}
-          base: "main"
-          labels: "jackaas"
+          branch: "update-version-${{ github.sha }}"
 
       - name: Create Release
         id: create_release
