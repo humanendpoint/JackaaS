@@ -25,6 +25,7 @@ jobs:
         run: |
           # overwrite the version file with the new version
           echo "${{ inputs.VERSION }}" > VERSION
+          echo "The contents of the VERSION file: $(cat VERSION)"
           echo "VERSION=$(cat VERSION)" >> $GITHUB_OUTPUT
 
       - name: Create Pull Request
