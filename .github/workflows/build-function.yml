@@ -33,7 +33,7 @@ jobs:
           token: ${{ secrets.TOKEN }}
           title: "New version release"
           body: "Updating version file"
-          branch: ${{ github.sha }}
+          branch: "update-version-${{ github.sha }}"
 
       - name: Create Release
         if: ${{ success() }}
