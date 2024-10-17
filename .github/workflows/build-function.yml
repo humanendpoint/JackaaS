@@ -62,7 +62,7 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v7
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.TOKEN }}
           commit-message: "update version file"
           title: "New version release"
           body: "Updating version file"
@@ -78,7 +78,7 @@ jobs:
           tag_name: ${{ steps.version.outputs.VERSION }}
           draft: false
           prerelease: false
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.TOKEN }}
           body: |
             This is a new release of the Google Cloud Function called JackaaS.
           files: ${{ github.workspace }}/bin
