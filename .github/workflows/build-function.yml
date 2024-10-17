@@ -20,16 +20,16 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: GCS Auth
-        id: gcs-auth
-        uses: 'google-github-actions/auth@v2'
-        with:
-          token_format: 'access_token'
-          credentials_json: "${{ env.GCF_CREDENTIALS }}"
+      #- name: GCS Auth
+      #  id: gcs-auth
+      #  uses: 'google-github-actions/auth@v2'
+      #  with:
+      #    token_format: 'access_token'
+      #    credentials_json: "${{ env.GCF_CREDENTIALS }}"
 
-      - name: Setup Cloud SDK
-        if: ${{ steps.gcs-auth.outcome == 'success' }}
-        uses: 'google-github-actions/setup-gcloud@v2'
+      #- name: Setup Cloud SDK 
+      #  if: ${{ steps.gcs-auth.outcome == 'success' }}
+      #  uses: 'google-github-actions/setup-gcloud@v2'
 
       # uncomment the below to deploy the function to GCF
       
