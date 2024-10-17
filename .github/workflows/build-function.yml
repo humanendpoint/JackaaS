@@ -30,6 +30,7 @@ jobs:
         uses: peter-evans/create-pull-request@v7
         with:
           commit-message: "update version file"
+          token: ${{ secrets.TOKEN }}
           title: "New version release"
           body: "Updating version file"
           branch: ${{ github.sha }}
