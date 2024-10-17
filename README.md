@@ -4,7 +4,7 @@ This is a Slack app to interact with JAMF, able to obtain data and perform (some
 It also can display charts of various input.
 <br>
 
-#### Note
+### Note
 
 There is an `example.yml` that can be used instead of `build-function.yml` once you clone this repo.
 It checks whether *this* repo has been updated with new code (subsequently a new version) or not, and then uploads the new version to google cloud functions for you.
@@ -13,20 +13,20 @@ It checks whether *this* repo has been updated with new code (subsequently a new
 ## Features
 
 - [x] handles authorization to run commands by comparing Slack user with JAMF user permissions
-- [x] outputs any handling / python errors directly to Slack
-
-#### device actions
-#### device info retrieval
-#### report lists
-#### charts (pie, bar, doughnut, horizontal bar)
-#### groups management
-#### other
+- [x] outputs any GCF handling / python errors to Slack DM window
+- [x] device actions
+- [x] device info retrieval
+- [x] report lists
+- [x] charts (pie, bar, doughnut, horizontal bar)
+- [x] groups management
+- [x] and more!
+- [ ] handles any "computer name" type for validation
 <br>
 
 ## Assumptions
 
-    assumes Slack user emails are identical to JAMF user email
-    assumes usernames in JAMF are structured like “u.sername” or a serial number (will be adjusted to be user determined for client naming style)
+    Slack user emails are identical to JAMF user email
+    usernames in JAMF are structured like “u.sername” or by serial number
 <br>
 
 ## More information
