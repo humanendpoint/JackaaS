@@ -1,7 +1,7 @@
 # JackaaS (JAMF Slack as a Service)
 
 [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/humanendpoint/JackaaS/main.svg)](https://results.pre-commit.ci/latest/github/humanendpoint/JackaaS/main)
-
+![Actions Status](https://github.com/humanendpoint/JackaaS/actions/workflows/build-function.yml/badge.svg)
 
 This is a Slack app to interact with JAMF, able to obtain data and perform (some) actions relevant to JAMF clients. 
 It also can display charts of various input.
