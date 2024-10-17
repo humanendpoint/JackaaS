@@ -1,3 +1,5 @@
 requests
 slack_sdk
 slack_bolt
+flask<3.0
+quickchart.io
