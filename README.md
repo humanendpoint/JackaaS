@@ -3,7 +3,7 @@
 [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/humanendpoint/JackaaS/main.svg)](https://results.pre-commit.ci/latest/github/humanendpoint/JackaaS/main)
 ![Actions Status](https://github.com/humanendpoint/JackaaS/actions/workflows/build-function.yml/badge.svg)
 
-This is a Slack app to interact with JAMF, able to obtain data and perform (some) actions relevant to JAMF clients. 
+This is a Slack app to interact with JAMF, able to obtain data and perform (some) actions relevant to JAMF clients.
 It also can display charts of various input.
 <br>
 
@@ -11,7 +11,7 @@ It also can display charts of various input.
 
 For IT teams that do not frequent GitHub often, there is an `example.yml` that can be used instead of `build-function.yml` once you clone this repo.
 It checks whether *this* repo has been updated with new code (subsequently a new version) or not, and then downloads it and uploads the new version to google cloud functions for you.
-This means you only need to clone/fork this repo, and ensure the workflow is enabled, it will run once a month.
+This means you only need to clone/fork this repo, and ensure the workflow is enabled, and it will run once a month and update the code, if required.
 <br>
 
 ## Features
