@@ -335,15 +335,13 @@ class SlackHandler:
         else:
             return "Please provide the script name after `show script`."
 
-    # unfinished
     def handle_mdmcommands(self, args):
         mdm_command_log = args.split()
         if len(mdm_command_log) >= 1:
             for computer_name in mdm_command_log:
-                if "." in computer_name or "CW" in computer_name:
-                    computer_id = self.jamf_utils.get_computer_id_from_name(
-                        computer_name, computers=None
-                    )
+                computer_id = self.jamf_utils.get_computer_id_from_name(
+                    computer_name, computers=None
+                )
                 mdm_command_log_info = (
                     self.jamf_client.orchestra.orchestrate_mdm_commandhistory(
                         computer_id
@@ -375,17 +373,16 @@ class SlackHandler:
 
         # Handle cases for specific computer names
         for computer_name in appstoreapps:
-            if "." in computer_name or "CW" in computer_name:
-                computer_id = self.jamf_utils.get_computer_id_from_name(
-                    computer_name, computers=None
-                )
-                appstore_info = self.jamf_client.orchestra.orchestrate_get_appstore(
-                    str(computer_id)
-                )
-                if appstore_info:
-                    return f"Appstore apps for `{computer_name}`:\n{appstore_info}"
-                else:
-                    return f"Failed to get appstore apps for `{computer_name}`."
+            computer_id = self.jamf_utils.get_computer_id_from_name(
+                computer_name, computers=None
+            )
+            appstore_info = self.jamf_client.orchestra.orchestrate_get_appstore(
+                str(computer_id)
+            )
+            if appstore_info:
+                return f"Appstore apps for `{computer_name}`:\n{appstore_info}"
+            else:
+                return f"Failed to get appstore apps for `{computer_name}`."
 
         # If no valid command, prompt for proper input
         return "Please enter the proper appstore command followed by computernames (or `u.sername`)."
@@ -401,10 +398,9 @@ class SlackHandler:
                 )
                 return expiry_dates
             for computer_name in expiry:
-                if "." in computer_name or "CW" in computer_name:
-                    computer_id = self.jamf_utils.get_computer_id_from_name(
-                        computer_name, computers=None
-                    )
+                computer_id = self.jamf_utils.get_computer_id_from_name(
+                    computer_name, computers=None
+                )
                 expiry_info = self.jamf_utils.mdm_expiry(computer_id)
                 if expiry_info:
                     return f"MDM expiry info for `{computer_name}`: {expiry_info}"
@@ -443,10 +439,9 @@ class SlackHandler:
                 return checkins
             else:
                 for computer_name in checkin:
-                    if "." in computer_name or "CW" in computer_name:
-                        computer_id = self.jamf_utils.get_computer_id_from_name(
-                            computer_name, computers=None
-                        )
+                    computer_id = self.jamf_utils.get_computer_id_from_name(
+                        computer_name, computers=None
+                    )
                     checkin_info = self.jamf_utils.last_check_in(computer_id)
                     if checkin_info:
                         return f"Check-in info: `{computer_name}`: {checkin_info}"
@@ -459,10 +454,9 @@ class SlackHandler:
         log = args.split()
         if len(log) >= 1:
             for computer_name in log:
-                if "." in computer_name or "CW" in computer_name:
-                    computer_id = self.jamf_utils.get_computer_id_from_name(
-                        computer_name, computers=None
-                    )
+                computer_id = self.jamf_utils.get_computer_id_from_name(
+                    computer_name, computers=None
+                )
                 if computer_id is not None:
                     log_info = self.jamf_client.orchestra.orchestrate_get_computer_logs(
                         [computer_id]
@@ -485,10 +479,9 @@ class SlackHandler:
         recovery = args.split()
         if len(recovery) >= 1:
             for computer_name in recovery:
-                if "." in computer_name or "CW" in computer_name:
-                    computer_id = self.jamf_utils.get_computer_id_from_name(
-                        computer_name, computers=None
-                    )
+                computer_id = self.jamf_utils.get_computer_id_from_name(
+                    computer_name, computers=None
+                )
                 if computer_id is not None:
                     recovery_info = self.jamf_client.orchestra.orchestrate_recoverykey(
                         computer_id
@@ -506,10 +499,9 @@ class SlackHandler:
         redeploy = args.split()
         if len(redeploy) >= 1:
             for computer_name in redeploy:
-                if "." in computer_name or "CW" in computer_name:
-                    computer_id = self.jamf_utils.get_computer_id_from_name(
-                        computer_name, computers=None
-                    )
+                computer_id = self.jamf_utils.get_computer_id_from_name(
+                    computer_name, computers=None
+                )
                 if computer_id is not None:
                     redeploy_info = self.jamf_client.orchestra.orchestrate_redeploy(
                         computer_id
@@ -527,10 +519,9 @@ class SlackHandler:
         lockpass = args.split()
         if len(lockpass) >= 1:
             for computer_name in lockpass:
-                if "." in computer_name or "CW" in computer_name:
-                    computer_id = self.jamf_utils.get_computer_id_from_name(
-                        computer_name, computers=None
-                    )
+                computer_id = self.jamf_utils.get_computer_id_from_name(
+                    computer_name, computers=None
+                )
                 if computer_id is not None:
                     lockpass_info = self.jamf_utils.lockpass(computer_id)
                     if lockpass_info:
@@ -544,10 +535,9 @@ class SlackHandler:
         if len(lock) >= 2:
             computer = lock[0]
             passcode = lock[1]
-            if "." in computer or "CW" in computer:
-                computer_id = self.jamf_utils.get_computer_id_from_name(
-                    computer, computers=None
-                )
+            computer_id = self.jamf_utils.get_computer_id_from_name(
+                computer, computers=None
+            )
             if computer_id is not None:
                 lock_info = self.jamf_utils.devicelock(computer_id, passcode)
                 if lock_info:
