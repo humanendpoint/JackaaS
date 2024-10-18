@@ -9,7 +9,7 @@ It also can display charts of various input.
 
 ### Note
 
-For IT teams that do not frequent GitHub often, there is an `example.yml` that can be used instead of `build-function.yml` once you clone this repo. <br>
+For IT teams that do not frequent GitHub often or code, there is an `example.yml` that can be used instead of `build-function.yml` once you clone this repo. <br>
 It acts like a clone/fork auto-updater: <br>
 It checks whether **this** repo has been updated with new code (subsequently a new version) or not, runs a checkout and then uploads the new version to google cloud functions for you. <br>
 This means you only need to clone/fork this repo, follow the setup steps in the wiki, and it will run once a month and update the code, if required, automatically. <br>
