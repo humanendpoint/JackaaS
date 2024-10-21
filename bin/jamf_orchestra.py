@@ -531,9 +531,9 @@ class JamfOrchestra:
                 serial_number = (
                     serial_number.text
                 )  # Assuming serial_number is directly under the root
-                computer[
-                    "serial_number"
-                ] = serial_number  # Add serial number to the computer record
+                computer["serial_number"] = (
+                    serial_number  # Add serial number to the computer record
+                )
             except XML.ParseError as e:
                 print(f"XML parsing error for ID {computer['id']}: {e}")
             except AttributeError:
