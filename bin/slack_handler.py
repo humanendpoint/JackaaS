@@ -155,9 +155,13 @@ class SlackHandler:
                 )
                 if details:
                     details_str = "\n".join(
-                        "\n".join(f"{key}: {value}" for key, value in detail.items())
-                        if isinstance(detail, dict)
-                        else str(detail)
+                        (
+                            "\n".join(
+                                f"{key}: {value}" for key, value in detail.items()
+                            )
+                            if isinstance(detail, dict)
+                            else str(detail)
+                        )
                         for detail in details
                     )
                     details_str_clean = details_str.strip('"')
