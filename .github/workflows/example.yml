@@ -78,7 +78,7 @@ jobs:
       - name: Create Release
         id: create_release
         if: ${{ success() }}
-        uses: softprops/action-gh-release@v2.0.8
+        uses: softprops/action-gh-release@v2.2.0
         with:
           name: "JackaaS"
           tag_name: ${{ steps.read_version.outputs.VERSION }}
