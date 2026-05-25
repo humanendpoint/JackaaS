@@ -71,14 +71,11 @@ class JamfGroups:
             return None
 
     def create_static_group_template(self, group_name, computers, is_smart="false"):
-        computer_entries = "\n".join(
-            f"""
+        computer_entries = "\n".join(f"""
             <computer>
                 <serial_number>{serial_number}</serial_number>
             </computer>
-            """
-            for serial_number in enumerate(computers, start=1)
-        )
+            """ for serial_number in enumerate(computers, start=1))
         xml_template = f"""
         <computer_group>
             <name>{group_name}</name>
